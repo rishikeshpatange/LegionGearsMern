@@ -24,7 +24,7 @@ function App() {
 
   // Fetch all products on load
   useEffect(() => {
-    fetch("http://localhost:5000/api/products")
+    fetch("https://legiongearsmern.onrender.com/api/products")
       .then((res) => res.json())
       .then((data) => setProducts(data));
   }, []);

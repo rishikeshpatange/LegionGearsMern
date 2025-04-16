@@ -11,7 +11,7 @@ const AdminUsers = () => {
   const getAllUsersData = async () => {
     try {
       const response = await fetch(
-        "http://localhost:5000/api/admin/users",
+        "https://legiongearsmern.onrender.com/api/admin/users",
         {
           method: "GET",
           headers: {
@@ -31,7 +31,7 @@ const AdminUsers = () => {
   const deleteUser = async (id) => {
     try {
       const response = await fetch(
-        `http://localhost:5000/api/admin/users/delete/${id}`,
+        `https://legiongearsmern.onrender.com/api/admin/users/delete/${id}`,
         {
           method: "DELETE",
           headers: {

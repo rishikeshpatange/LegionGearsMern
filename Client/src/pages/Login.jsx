@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css"; 
 
 export const Login = () => {
-  const URI = "http://localhost:5000/api/auth/login";
+  const URI = "https://legiongearsmern.onrender.com/api/auth/login";
   const navigate = useNavigate();
   const { storeTokenInLS } = useAuth();
 

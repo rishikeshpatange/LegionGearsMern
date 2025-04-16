@@ -4,7 +4,6 @@ import { createContext, useContext, useState } from "react";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [services, setServices] = useState([]);
   const [token, setToken] = useState(localStorage.getItem("token"));
   const [user, setUser]= useState("");
   const AuthorizationToken = `Bearer ${token}`
@@ -31,7 +30,7 @@ export const AuthProvider = ({ children }) => {
 
   const userAuthentication = async()=>{
     try {
-      const response = await fetch("http://localhost:5000/api/auth/user",{
+      const response = await fetch("https://legiongearsmern.onrender.com/api/auth/user",{
         method: "GET",
         headers:{
           Authorization: AuthorizationToken,

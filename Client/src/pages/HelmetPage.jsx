@@ -28,16 +28,6 @@ const HelmetPage = ({ products }) => {
               >
                 {helmet.name}
               </h3>
-              {/* <p
-                className="text-sm text-gray-600 mb-3 truncate whitespace-nowrap overflow-hidden text-ellipsis"
-                title={
-                  helmet.description ||
-                  "Durable and stylish helmet for all riders."
-                }
-              >
-                {helmet.description ||
-                  "Durable and stylish helmet for all riders."}
-              </p> */}
               <p className="font-medium">₹{helmet.price}</p>
             </Link>
           </div>

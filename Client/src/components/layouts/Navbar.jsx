@@ -26,6 +26,9 @@ export default function Navbar({ toggleCart, cartItems = [] }) {
             <NavLink to="/jackets" className="text-gray-600 hover:text-black">
               Jackets
             </NavLink>
+            <NavLink to="/admin/users" className="text-gray-600 hover:text-black">
+              Admin
+            </NavLink>
 
             {/* Cart Icon - desktop only */}
             <button
@@ -116,6 +119,13 @@ export default function Navbar({ toggleCart, cartItems = [] }) {
           onClick={() => setIsOpen(false)}
         >
           Jackets
+        </NavLink>
+        <NavLink
+          to="/admin/users"
+          className="text-4xl font-semibold text-gray-800 hover:text-black"
+          onClick={() => setIsOpen(false)}
+        >
+          Admin
         </NavLink>
 
         {/* Cart Icon on Mobile Menu */}
