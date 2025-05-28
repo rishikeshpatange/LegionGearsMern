@@ -38,7 +38,7 @@ const Checkout = ({ cartItems }) => {
 
       const token = localStorage.getItem('token'); // 👈 Your auth token
 
-      const res = await fetch('https://legiongearsmern.onrender.com/api/orders', {
+      const res = await fetch('http://localhost:5173/api/orders', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

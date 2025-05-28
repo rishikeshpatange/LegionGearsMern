@@ -1,8 +1,11 @@
-import React from 'react';
 import { Link } from 'react-router-dom';
 
 const CartDrawer = ({ cartItems, toggleCart, isOpen, clearCart, updateQuantity }) => {
   const total = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+
+  const handleCheckout = ()=>{
+    toggleCart()
+  }
 
   return (
     <div>
@@ -48,6 +51,7 @@ const CartDrawer = ({ cartItems, toggleCart, isOpen, clearCart, updateQuantity }
         <div className="mt-6 flex space-x-4">
           <Link to="/checkout">
             <button
+            onClick={handleCheckout}
               className={`flex-1 bg-gray-500 hover:bg-gray-600 text-white py-2 px-4 rounded ${cartItems.length === 0 ? 'bg-gray-400 cursor-not-allowed' : 'bg-blue-600 text-white'}`}
               disabled={cartItems.length === 0}
             >

@@ -20,7 +20,7 @@ const AdminUpdate = () => {
   const getSingleUserData = async () => {
     try {
       const response = await fetch(
-        `https://legiongearsmern.onrender.com/api/admin/users/${params.id}`,
+        `http://localhost:5173/api/admin/users/${params.id}`,
         {
           method: "GET",
           headers: {
@@ -49,7 +49,7 @@ const AdminUpdate = () => {
     e.preventDefault();
     try {
       const response = await fetch(
-        `https://legiongearsmern.onrender.com/api/admin/users/update/${params.id}`,
+        `http://localhost:5000/api/admin/users/update/${params.id}`,
         {
           method: "PATCH",
           headers: {

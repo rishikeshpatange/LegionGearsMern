@@ -16,17 +16,51 @@ import AdminLayout from "./components/layouts/Admin-layout";
 import AdminUsers from "./pages/AdminUsers";
 import AdminUpdate from "./pages/AdminUpdate";
 import AdminOrder from "./pages/AdminOrder";
+import Racing from "./pages/Racing";
+import Sports from "./pages/Sports";
+import Adventure from "./pages/Adventure";
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [products, setProducts] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Fetch all products on load
+  // Fetch all products on load with timeout
   useEffect(() => {
-    fetch("https://legiongearsmern.onrender.com/api/products")
-      .then((res) => res.json())
-      .then((data) => setProducts(data));
+    const fetchData = async () => {
+      const timeout = setTimeout(() => {
+        setError(
+          "Backend is taking too long to respond. Please try again later."
+        );
+        setIsLoading(false);
+      }, 100000); 
+
+      try {
+        const response = await fetch("http://localhost:5000/api/products");
+        clearTimeout(timeout);
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch products");
+        }
+
+        const data = await response.json();
+        setProducts(data);
+        setError(null);
+      } catch (err) {
+        setError(err.message || "Failed to fetch products");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      // Cleanup timeout if component unmounts
+      clearTimeout(timeout);
+    };
   }, []);
 
   // Function to add to cart or update the quantity of the existing product
@@ -86,17 +120,23 @@ function App() {
         />
         <Route path="/helmets" element={<HelmetPage products={products} />} />
         <Route path="/jackets" element={<Jacket products={products} />} />
-        <Route path="/jackets" element={<Jacket products={products} />} />
+        <Route path="/racing" element={<Racing products={products} isLoading={isLoading} error={error} />} />
+        <Route
+          path="/sports"
+          element={
+            <Sports products={products} isLoading={isLoading} error={error} />
+          }
+        />
+        <Route path="/adventure" element={<Adventure products={products} />} />
         <Route
           path="/product/:id"
           element={<SingleProduct addToCart={addToCart} />}
         />
-         <Route path="/admin" element={<AdminLayout />}>
-            <Route path="users" element={<AdminUsers />} />
-            <Route path="orders" element={<AdminOrder />} />
-            <Route path="users/:id/edit" element={<AdminUpdate />} />
-          </Route>
-
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="users" element={<AdminUsers />} />
+          <Route path="orders" element={<AdminOrder />} />
+          <Route path="users/:id/edit" element={<AdminUpdate />} />
+        </Route>
       </Routes>
       <Fotter />
     </BrowserRouter>
