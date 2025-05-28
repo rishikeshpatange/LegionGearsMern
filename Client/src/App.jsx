@@ -35,7 +35,7 @@ function App() {
           "Backend is taking too long to respond. Please try again later."
         );
         setIsLoading(false);
-      }, 100000); 
+      }, 10000); // 5 seconds timeout
 
       try {
         const response = await fetch("http://localhost:5000/api/products");
@@ -118,8 +118,8 @@ function App() {
           path="/checkout"
           element={<Checkout cartItems={cartItems} updateCart={setCartItems} />}
         />
-        <Route path="/helmets" element={<HelmetPage products={products} />} />
-        <Route path="/jackets" element={<Jacket products={products} />} />
+        <Route path="/helmets" element={<HelmetPage products={products} isLoading={isLoading} error={error} />} />
+        <Route path="/jackets" element={<Jacket products={products} isLoading={isLoading} error={error} />} />
         <Route path="/racing" element={<Racing products={products} isLoading={isLoading} error={error} />} />
         <Route
           path="/sports"
@@ -127,7 +127,7 @@ function App() {
             <Sports products={products} isLoading={isLoading} error={error} />
           }
         />
-        <Route path="/adventure" element={<Adventure products={products} />} />
+        <Route path="/adventure" element={<Adventure products={products} isLoading={isLoading} error={error}  />} />
         <Route
           path="/product/:id"
           element={<SingleProduct addToCart={addToCart} />}

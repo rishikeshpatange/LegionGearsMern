@@ -1,10 +1,9 @@
-import { Link } from "react-router-dom";
 import { NavLink } from "react-router-dom";
 
-const Home = ({ products }) => {
-  const filteredProducts = products.filter(
-    (product) => product.category === "jacket"
-  );
+const Home = () => {
+  // const filteredProducts = products.filter(
+  //   (product) => product.category === "jacket"
+  // );
 
   return (
     <div className="min-h-screen bg-white">

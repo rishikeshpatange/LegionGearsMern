@@ -10,7 +10,7 @@ const adminRoute = require("./routes/admin-router");
 
 // handling cors policy
 const corsOptions = {
-  origin: "https://legiongearsmern.web.app",
+  origin: "http://localhost:5173",
   methods: "GET, POST, PUT, DELETE, PATCH, HEAD",
   credential: true
 }
