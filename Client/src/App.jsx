@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
 import Register from "./pages/Register";
 import { Login } from "./pages/Login";
 import Logout from "./pages/Logout";
@@ -19,6 +19,18 @@ import AdminOrder from "./pages/AdminOrder";
 import Racing from "./pages/Racing";
 import Sports from "./pages/Sports";
 import Adventure from "./pages/Adventure";
+import Motocross from "./pages/Motocross";
+
+// ScrollToTop component to handle scroll restoration
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 function App() {
   const [cartItems, setCartItems] = useState([]);
@@ -27,20 +39,13 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  // Fetch all products on load with timeout
+  // Fetch all products on load
   useEffect(() => {
     const fetchData = async () => {
-      const timeout = setTimeout(() => {
-        setError(
-          "Backend is taking too long to respond. Please try again later."
-        );
-        setIsLoading(false);
-      }, 10000); // 5 seconds timeout
-
       try {
-        const response = await fetch("http://localhost:5000/api/products");
-        clearTimeout(timeout);
-
+        // const response = await fetch("http://localhost:5000/api/products");
+        const response = await fetch("https://legiongearsmern.onrender.com/api/products");
+        
         if (!response.ok) {
           throw new Error("Failed to fetch products");
         }
@@ -56,11 +61,6 @@ function App() {
     };
 
     fetchData();
-
-    return () => {
-      // Cleanup timeout if component unmounts
-      clearTimeout(timeout);
-    };
   }, []);
 
   // Function to add to cart or update the quantity of the existing product
@@ -107,8 +107,12 @@ function App() {
         toggleCart={toggleCart}
         isOpen={cartOpen}
         clearCart={clearCart}
-        updateQuantity={updateQuantity} // Pass updateQuantity as prop
+        updateQuantity={updateQuantity}
       />
+      
+      {/* ScrollToTop component placed here */}
+      <ScrollToTop />
+      
       <Routes>
         <Route path="/register" element={<Register />} />
         <Route path="/login" element={<Login />} />
@@ -127,7 +131,8 @@ function App() {
             <Sports products={products} isLoading={isLoading} error={error} />
           }
         />
-        <Route path="/adventure" element={<Adventure products={products} isLoading={isLoading} error={error}  />} />
+        <Route path="/adventure" element={<Adventure products={products} isLoading={isLoading} error={error} />} />
+        <Route path="/motocross" element={<Motocross products={products} isLoading={isLoading} error={error} />} />
         <Route
           path="/product/:id"
           element={<SingleProduct addToCart={addToCart} />}

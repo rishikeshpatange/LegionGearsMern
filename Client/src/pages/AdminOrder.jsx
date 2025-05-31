@@ -9,7 +9,7 @@ const AdminOrders = () => {
 
   const getAllOrders = async () => {
     try {
-      const response = await fetch("http://localhost:5000/api/admin/orders", {
+      const response = await fetch("https://legiongearsmern.onrender.com/api/admin/orders", {
         method: "GET",
         headers: {
           Authorization: AuthorizationToken,

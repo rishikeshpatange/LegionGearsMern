@@ -8,20 +8,14 @@ const Jacket = ({ products, isLoading, error }) => {
     <div className="px-4 py-6">
       <h2 className="text-2xl font-bold mb-6 text-center">Jackets</h2>
 
-      {error ? (
-        <div className="text-center py-10">
-          <div className="text-red-500 font-medium mb-2">{error}</div>
-          <button 
-            onClick={() => window.location.reload()} 
-            className="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition-colors"
-          >
-            Retry
-          </button>
-        </div>
-      ) : isLoading ? (
+      {isLoading ? (
         <div className="flex flex-col items-center justify-center h-64">
           <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-gray-900 mb-4"></div>
           <p>Loading jackets collection...</p>
+        </div>
+      ) : error ? (
+        <div className="text-center py-10">
+          <div className="text-red-500 font-medium">{error}</div>
         </div>
       ) : jackets.length === 0 ? (
         <div className="text-center text-gray-500 py-10">
@@ -32,7 +26,7 @@ const Jacket = ({ products, isLoading, error }) => {
           {jackets.map((jacket, i) => (
             <div key={i} className="bg-white p-1">
               <Link to={`/product/${jacket._id}`} className="block">
-                <div className="h-80 sm:h-96 lg:h-[450px] w-full mb-2 overflow-hidden">
+                <div className="h-60 sm:h-96 lg:h-[450px] w-full mb-2 overflow-hidden">
                   <img
                     src={jacket.imageUrl}
                     alt={jacket.name}

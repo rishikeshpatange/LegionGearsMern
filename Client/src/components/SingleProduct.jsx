@@ -8,6 +8,7 @@ const SingleProduct = ({ addToCart }) => {
 
   useEffect(() => {
     fetch(`https://legiongearsmern.onrender.com/api/products/${id}`)
+    // fetch(`http://localhost:5000/api/products/${id}`)
       .then(res => res.json())
       .then(data => setProduct(data));
   }, [id]);
@@ -24,7 +25,7 @@ const SingleProduct = ({ addToCart }) => {
         src={product.imageUrl}
       />
       <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-      <p>Racing helmet</p>
+      <p>Product</p>
         <h1 className="text-gray-900 text-3xl title-font font-medium mb-1">{product.name}</h1>
         <p className="leading-relaxed mb-4 text-gray-600">{product.description || "No description provided."}</p>
         <div className="flex items-center mb-4">
